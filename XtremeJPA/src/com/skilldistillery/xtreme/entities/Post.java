@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -37,10 +40,12 @@ public class Post {
 
 	@Column(name = "created_at")
 	@Temporal(TemporalType.DATE)
+	@CreationTimestamp
 	private Date createdAt;
 
 	@Column(name = "updated_at")
 	@Temporal(TemporalType.DATE)
+	@UpdateTimestamp
 	private Date updatedAt;
 
 	@ManyToOne
