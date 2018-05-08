@@ -63,25 +63,25 @@ public class PostDAOImpl implements PostDAO {
 	@Override
 	public Post updateById(int postId, Post postUpdates) {
 		Post managedPost = em.find(Post.class, postId);
-		if (!postUpdates.getBrand().equals(null)) {
+		if (postUpdates.getBrand()!= null) {
 			managedPost.setBrand(postUpdates.getBrand());
 		}
-		if (!postUpdates.getDescription().equals(null)) {
+		if (postUpdates.getDescription()!= null) {
 			managedPost.setDescription(postUpdates.getDescription());
 		}
-		if (!postUpdates.getEmail().equals(null)) {
+		if (postUpdates.getEmail()!= null) {
 			managedPost.setEmail(postUpdates.getEmail());
 		}
-		if (!postUpdates.getName().equals(null)) {
+		if (postUpdates.getName()!= null) {
 			managedPost.setName(postUpdates.getName());
 		}
-		if (!postUpdates.getImageUrl().equals(null)) {
+		if (postUpdates.getImageUrl()!= null) {
 			managedPost.setImageUrl(postUpdates.getImageUrl());
 		}
 		if (postUpdates.getPrice() > 0.0) {
 			managedPost.setPrice(postUpdates.getPrice());
 		}
-		if (!postUpdates.getTitle().equals(null)) {
+		if (postUpdates.getTitle()!= null) {
 			managedPost.setTitle(postUpdates.getTitle());
 		}
 		if (postUpdates.getCategory() != null) {
