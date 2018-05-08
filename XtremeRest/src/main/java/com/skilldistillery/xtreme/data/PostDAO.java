@@ -8,8 +8,8 @@ public interface PostDAO {
 	List<Post> index();
 	Post show(int postId);
 	Post create(String jsonPost);
-	Post replaceById(int postId, String jsonPost);
-	Post updateById(int postId, String jsonPost);
+	Post replaceById(int postId, Post postUpdates);
+	Post updateById(int postId, Post postUpdates);
 	Boolean destroy(int postId); 
 
 }

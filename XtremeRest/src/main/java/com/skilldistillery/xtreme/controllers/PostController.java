@@ -15,29 +15,43 @@ import com.skilldistillery.xtreme.entities.Post;
 @RestController
 @RequestMapping(path = "/api")
 public class PostController {
-	
+
 	@Autowired
 	private PostDAO postDAO;
-	
-	@RequestMapping(path="/ping", method=RequestMethod.GET)
+
+	@RequestMapping(path = "/ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
-	
-	@RequestMapping(path="/posts", method=RequestMethod.GET)
+
+	@RequestMapping(path = "/posts", method = RequestMethod.GET)
 	public List<Post> index() {
 		return postDAO.index();
 	}
-	
-	@RequestMapping(path="/posts/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
 	public Post show(@PathVariable int id) {
 		return postDAO.show(id);
 	}
-	
-	@RequestMapping(path="/posts", method=RequestMethod.POST)
+
+	@RequestMapping(path = "/posts", method = RequestMethod.POST)
 	public Post create(@RequestBody String jsonPost) {
 		return postDAO.create(jsonPost);
 	}
-	
+
+	@RequestMapping(path = "/posts/{id}", method = RequestMethod.PUT)
+	public Post replaceById(@PathVariable int id, @RequestBody Post post) {
+		return postDAO.replaceById(id, post);
+	}
+
+	@RequestMapping(path = "/posts/{id}", method = RequestMethod.PATCH)
+	public Post updateById(@PathVariable int id, @RequestBody Post post) {
+		return postDAO.updateById(id, post);
+	}
+
+	@RequestMapping(path = "posts/{id}", method = RequestMethod.DELETE)
+	public Boolean destroy(@PathVariable int id) {
+		return postDAO.destroy(id);
+	}
+
 }
- 

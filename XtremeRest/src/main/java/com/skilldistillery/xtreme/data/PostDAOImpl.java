@@ -14,7 +14,7 @@ import com.skilldistillery.xtreme.entities.Post;
 @Transactional
 @Service
 public class PostDAOImpl implements PostDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -37,7 +37,7 @@ public class PostDAOImpl implements PostDAO {
 			newPost = mapper.readValue(jsonPost, Post.class);
 			em.persist(newPost);
 			em.flush();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,21 +45,68 @@ public class PostDAOImpl implements PostDAO {
 	}
 
 	@Override
-	public Post replaceById(int postId, String jsonBody) {
-		Post oldPost = em.find(Post.class, postId);
-		return null;
+	public Post replaceById(int postId, Post postUpdates) {
+		Post managedPost = em.find(Post.class, postId);
+		managedPost.setBrand(postUpdates.getBrand());
+		managedPost.setDescription(postUpdates.getDescription());
+		managedPost.setEmail(postUpdates.getEmail());
+		managedPost.setName(postUpdates.getName());
+		managedPost.setImageUrl(postUpdates.getImageUrl());
+		managedPost.setPrice(postUpdates.getPrice());
+		managedPost.setTitle(postUpdates.getTitle());
+		managedPost.setCategory(postUpdates.getCategory());
+		em.persist(managedPost);
+		em.flush();
+		return managedPost;
 	}
 
 	@Override
-	public Post updateById(int postId, String jsonBody) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post updateById(int postId, Post postUpdates) {
+		Post managedPost = em.find(Post.class, postId);
+		if (!postUpdates.getBrand().equals(null)) {
+			managedPost.setBrand(postUpdates.getBrand());
+		}
+		if (!postUpdates.getDescription().equals(null)) {
+			managedPost.setDescription(postUpdates.getDescription());
+		}
+		if (!postUpdates.getEmail().equals(null)) {
+			managedPost.setEmail(postUpdates.getEmail());
+		}
+		if (!postUpdates.getName().equals(null)) {
+			managedPost.setName(postUpdates.getName());
+		}
+		if (!postUpdates.getImageUrl().equals(null)) {
+			managedPost.setImageUrl(postUpdates.getImageUrl());
+		}
+		if (postUpdates.getPrice() > 0.0) {
+			managedPost.setPrice(postUpdates.getPrice());
+		}
+		if (!postUpdates.getTitle().equals(null)) {
+			managedPost.setTitle(postUpdates.getTitle());
+		}
+		if (postUpdates.getCategory() != null) {
+			managedPost.setCategory(postUpdates.getCategory());
+		}
+		em.persist(managedPost);
+		em.flush();
+		return managedPost;
 	}
 
 	@Override
 	public Boolean destroy(int postId) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean deleted = false;
+		Post delete = em.find(Post.class, postId);
+		if (delete != null) {
+
+			try {
+				em.remove(delete);
+				deleted = true;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return deleted;
 	}
 
 }
