@@ -27,7 +27,6 @@ public class Category {
 
 	/* constructors */
 	public Category() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Category(int id, String name) {

@@ -47,48 +47,45 @@ public class PostDAOImpl implements PostDAO {
 	@Override
 	public Post replaceById(int postId, Post postUpdates) {
 		Post managedPost = em.find(Post.class, postId);
-		managedPost.setBrand(postUpdates.getBrand());
-		managedPost.setDescription(postUpdates.getDescription());
-		managedPost.setEmail(postUpdates.getEmail());
-		managedPost.setName(postUpdates.getName());
-		managedPost.setImageUrl(postUpdates.getImageUrl());
-		managedPost.setPrice(postUpdates.getPrice());
 		managedPost.setTitle(postUpdates.getTitle());
-		managedPost.setCategory(postUpdates.getCategory());
-		em.persist(managedPost);
-		em.flush();
+		managedPost.setName(postUpdates.getName());
+		managedPost.setEmail(postUpdates.getEmail());
+		managedPost.setDescription(postUpdates.getDescription());
+		managedPost.setPrice(postUpdates.getPrice());
+//		managedPost.setImageUrl(postUpdates.getImageUrl());
+		managedPost.setBrand(postUpdates.getBrand());
+//		managedPost.setCategory(postUpdates.getCategory());
+// persist is only for creating an object
 		return managedPost;
 	}
 
 	@Override
 	public Post updateById(int postId, Post postUpdates) {
 		Post managedPost = em.find(Post.class, postId);
-		if (postUpdates.getBrand()!= null) {
-			managedPost.setBrand(postUpdates.getBrand());
+		if (postUpdates.getTitle()!= null) {
+			managedPost.setTitle(postUpdates.getTitle());
 		}
-		if (postUpdates.getDescription()!= null) {
-			managedPost.setDescription(postUpdates.getDescription());
-		}
-		if (postUpdates.getEmail()!= null) {
-			managedPost.setEmail(postUpdates.getEmail());
-		}
-		if (postUpdates.getName()!= null) {
+		if (postUpdates.getName() != null && postUpdates.getName().equals("")) {
 			managedPost.setName(postUpdates.getName());
 		}
-		if (postUpdates.getImageUrl()!= null) {
-			managedPost.setImageUrl(postUpdates.getImageUrl());
+		if (postUpdates.getEmail() != null && postUpdates.getEmail().equals("")) {
+			managedPost.setEmail(postUpdates.getEmail());
+		}
+		if (postUpdates.getDescription() != null && postUpdates.getDescription().equals("")) {
+			managedPost.setDescription(postUpdates.getDescription());
 		}
 		if (postUpdates.getPrice() > 0.0) {
 			managedPost.setPrice(postUpdates.getPrice());
 		}
-		if (postUpdates.getTitle()!= null) {
-			managedPost.setTitle(postUpdates.getTitle());
+		if (postUpdates.getImageUrl() != null && postUpdates.getImageUrl().equals("")) {
+			managedPost.setImageUrl(postUpdates.getImageUrl());
 		}
-		if (postUpdates.getCategory() != null) {
-			managedPost.setCategory(postUpdates.getCategory());
+		if (postUpdates.getBrand() != null && postUpdates.getBrand().equals("")) {
+			managedPost.setBrand(postUpdates.getBrand());
 		}
-		em.persist(managedPost);
-		em.flush();
+//		if (postUpdates.getCategory() != null) {
+//			managedPost.setCategory(postUpdates.getCategory());
+//		}
 		return managedPost;
 	}
 

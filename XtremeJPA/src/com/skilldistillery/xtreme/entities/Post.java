@@ -1,9 +1,10 @@
 package com.skilldistillery.xtreme.entities;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,12 +40,12 @@ public class Post {
 	private String brand;
 
 	@Column(name = "created_at")
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@CreationTimestamp
 	private Date createdAt;
 
 	@Column(name = "updated_at")
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE) // If sql.Date import, no need for temporal
 	@UpdateTimestamp
 	private Date updatedAt;
 
@@ -53,12 +54,11 @@ public class Post {
 	private Category category;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post", cascade=CascadeType.REMOVE)
 	private List<Comment> comments;
 
 	/* constructors */
 	public Post() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Post(int id, String title, String name, String email, String description, double price, String imageUrl,

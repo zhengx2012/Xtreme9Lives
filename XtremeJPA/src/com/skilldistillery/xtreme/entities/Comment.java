@@ -1,5 +1,6 @@
 package com.skilldistillery.xtreme.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,6 @@ public class Comment {
 
 	/* constructors */
 	public Comment() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Comment(int id, String name, String content) {
