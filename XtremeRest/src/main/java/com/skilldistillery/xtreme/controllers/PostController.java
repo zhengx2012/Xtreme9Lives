@@ -51,12 +51,12 @@ public class PostController {
 	}
 
 	@RequestMapping(path = "/posts/{id}", method = RequestMethod.PUT)
-	public Post replaceById(@PathVariable int id, @RequestBody Post post) {
+	public Post replace(@PathVariable int id, @RequestBody Post post) {
 		return postDAO.replaceById(id, post);
 	}
 
 	@RequestMapping(path = "/posts/{id}", method = RequestMethod.PATCH)
-	public Post updateById(@PathVariable int id, @RequestBody Post post) {
+	public Post update(@PathVariable int id, @RequestBody Post post) {
 		return postDAO.updateById(id, post);
 	}
 

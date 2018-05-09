@@ -62,25 +62,25 @@ public class PostDAOImpl implements PostDAO {
 	@Override
 	public Post updateById(int postId, Post postUpdates) {
 		Post managedPost = em.find(Post.class, postId);
-		if (postUpdates.getTitle()!= null) {
+		if (postUpdates.getTitle()!= null && !postUpdates.getTitle().equals("")) {
 			managedPost.setTitle(postUpdates.getTitle());
 		}
-		if (postUpdates.getName() != null && postUpdates.getName().equals("")) {
+		if (postUpdates.getName() != null && !postUpdates.getName().equals("")) {
 			managedPost.setName(postUpdates.getName());
 		}
-		if (postUpdates.getEmail() != null && postUpdates.getEmail().equals("")) {
+		if (postUpdates.getEmail() != null && !postUpdates.getEmail().equals("")) {
 			managedPost.setEmail(postUpdates.getEmail());
 		}
-		if (postUpdates.getDescription() != null && postUpdates.getDescription().equals("")) {
+		if (postUpdates.getDescription() != null && !postUpdates.getDescription().equals("")) {
 			managedPost.setDescription(postUpdates.getDescription());
 		}
 		if (postUpdates.getPrice() > 0.0) {
 			managedPost.setPrice(postUpdates.getPrice());
 		}
-		if (postUpdates.getImageUrl() != null && postUpdates.getImageUrl().equals("")) {
+		if (postUpdates.getImageUrl() != null && !postUpdates.getImageUrl().equals("")) {
 			managedPost.setImageUrl(postUpdates.getImageUrl());
 		}
-		if (postUpdates.getBrand() != null && postUpdates.getBrand().equals("")) {
+		if (postUpdates.getBrand() != null && !postUpdates.getBrand().equals("")) {
 			managedPost.setBrand(postUpdates.getBrand());
 		}
 //		if (postUpdates.getCategory() != null) {
