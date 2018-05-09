@@ -2,6 +2,9 @@ package com.skilldistillery.xtreme.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +23,9 @@ public class PostController {
 	private PostDAO postDAO;
 
 	@RequestMapping(path = "/ping", method = RequestMethod.GET)
-	public String ping() {
+	public String ping(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(202);
+		response.setHeader("Location", "http://localhost:8080/ping");
 		return "pong";
 	}
 
@@ -35,8 +40,14 @@ public class PostController {
 	}
 
 	@RequestMapping(path = "/posts", method = RequestMethod.POST)
-	public Post create(@RequestBody String jsonPost) {
-		return postDAO.create(jsonPost);
+	public Post create(@RequestBody String jsonPost, HttpServletResponse response) {
+		Post created = postDAO.create(jsonPost);
+		if (created == null) {
+			response.setStatus(500);
+			return null;
+		}
+		response.setStatus(201);
+		return created;
 	}
 
 	@RequestMapping(path = "/posts/{id}", method = RequestMethod.PUT)
