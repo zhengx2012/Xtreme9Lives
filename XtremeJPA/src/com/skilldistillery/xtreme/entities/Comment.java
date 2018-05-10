@@ -23,7 +23,7 @@ public class Comment {
 	private String content;
 
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "post_id")
 	private Post post;
 

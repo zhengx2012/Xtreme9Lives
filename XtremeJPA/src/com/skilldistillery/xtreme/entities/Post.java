@@ -53,7 +53,6 @@ public class Post {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "post", cascade=CascadeType.REMOVE)
 	private List<Comment> comments;
 

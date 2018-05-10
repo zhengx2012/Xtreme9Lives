@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.xtreme.data.PostDAO;
 import com.skilldistillery.xtreme.entities.Post;
+import com.skilldistillery.xtreme.repositories.PostRepository;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -21,6 +22,9 @@ public class PostController {
 
 	@Autowired
 	private PostDAO postDAO;
+
+	@Autowired
+	private PostRepository postRepo;
 
 	@RequestMapping(path = "/ping", method = RequestMethod.GET)
 	public String ping(HttpServletRequest request, HttpServletResponse response) {
@@ -63,6 +67,21 @@ public class PostController {
 	@RequestMapping(path = "posts/{id}", method = RequestMethod.DELETE)
 	public Boolean destroy(@PathVariable int id) {
 		return postDAO.destroy(id);
+	}
+
+	@RequestMapping(path = "/categories/{id}/posts", method = RequestMethod.GET)
+	public List<Post> index(@PathVariable int id) {
+		return postRepo.findByCategoryId(id);
+	}
+	
+	@RequestMapping(path = "/posts/search/{keyword}", method = RequestMethod.GET)
+	public List<Post> index(@PathVariable String keyword) {
+		return postRepo.queryByKeywordLikeIgnoreCase("%"+keyword+"%");
+	}
+	
+	@RequestMapping(path = "/posts/search/price/{low}/{high}", method = RequestMethod.GET)
+	public List<Post> index(@PathVariable double low, @PathVariable double high) {
+		return postRepo.findByPriceBetween(low, high);
 	}
 
 }
