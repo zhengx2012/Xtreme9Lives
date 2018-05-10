@@ -5,7 +5,7 @@ import java.util.List;
 import com.skilldistillery.xtreme.entities.Category;
 
 public interface CategoryService {
-	
-	List<Category> index();
+
+	List<Category> findAllCategories();
 
 }

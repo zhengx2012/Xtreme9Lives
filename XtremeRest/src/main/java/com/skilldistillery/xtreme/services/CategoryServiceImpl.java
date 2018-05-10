@@ -10,12 +10,12 @@ import com.skilldistillery.xtreme.repositories.CategoryRepository;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-	
+
 	@Autowired
 	private CategoryRepository categoryRepo;
 
 	@Override
-	public List<Category> index() {
+	public List<Category> findAllCategories() {
 		return categoryRepo.findAll();
 	}
 

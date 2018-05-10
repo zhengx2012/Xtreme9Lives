@@ -19,7 +19,7 @@ public class CategoryController {
 
 	@RequestMapping(path = "/categories", method = RequestMethod.GET)
 	public List<Category> index() {
-		return categoryService.index();
+		return categoryService.findAllCategories();
 	}
 
 }

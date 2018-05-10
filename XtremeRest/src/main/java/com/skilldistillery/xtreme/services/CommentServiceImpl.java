@@ -11,16 +11,16 @@ import com.skilldistillery.xtreme.repositories.PostRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-	
+
 	@Autowired
 	private CommentRepository commentRepo;
-	
+
 	@Autowired
 	private PostRepository postRepo;
 
 	@Override
 	public List<Comment> getCommentsForPostById(int postId) {
-		return commentRepo.queryForPostsWithComments(postId);
+		return commentRepo.findByPostId(postId);
 	}
 
 	@Override
@@ -32,11 +32,10 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Boolean deleteCommentById(int postId, int commentId) {
-		try {
+		Comment comment = commentRepo.findById(commentId).get();
+		if (comment.getPost().getId() == postId) {
 			commentRepo.deleteById(commentId);
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return false;
 	}

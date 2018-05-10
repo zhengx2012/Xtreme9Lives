@@ -22,7 +22,7 @@ public class CommentController {
 	private CommentService commentService;
 
 	@RequestMapping(path = "/posts/{id}/comments", method = RequestMethod.GET)
-	public List<Comment> index(@PathVariable int id, HttpServletResponse response) {
+	public List<Comment> indexForComments(@PathVariable int id, HttpServletResponse response) {
 		List<Comment> comments = commentService.getCommentsForPostById(id);
 		if (comments == null) {
 			response.setStatus(500);
