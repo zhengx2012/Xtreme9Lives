@@ -25,8 +25,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> queryByKeywordLikeIgnoreCase(String keyword) {
-		return postRepo.queryByKeywordLikeIgnoreCase(keyword);
+	public List<Post> searchForPost(String keyword) {
+		// return postRepo.queryByKeywordLikeIgnoreCase(keyword);
+		return postRepo.findByTitleContainingOrNameContaining(keyword, keyword);
 	}
 
 }

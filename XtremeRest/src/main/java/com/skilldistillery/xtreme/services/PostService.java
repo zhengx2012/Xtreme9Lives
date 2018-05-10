@@ -10,6 +10,6 @@ public interface PostService {
 
 	List<Post> findByPriceBetween(double min, double max);
 
-	List<Post> queryByKeywordLikeIgnoreCase(String keyword);
+	List<Post> searchForPost(String keyword);
 
 }

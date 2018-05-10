@@ -13,9 +13,11 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	List<Post> findByCategoryId(int id);
 
 	List<Post> findByPriceBetween(double min, double max);
+	
+	List<Post> findByTitleContainingOrNameContaining(String name, String title);
 
-	/* custom queries */
-	@Query("SELECT p FROM Post p WHERE p.title LIKE :keyword OR p.name LIKE :keyword")
-	List<Post> queryByKeywordLikeIgnoreCase(@Param("keyword")String keyword);
+//	/* custom queries */
+//	@Query("SELECT p FROM Post p WHERE p.title LIKE :keyword OR p.name LIKE :keyword")
+//	List<Post> queryByKeywordLikeIgnoreCase(@Param("keyword")String keyword);
 
 }

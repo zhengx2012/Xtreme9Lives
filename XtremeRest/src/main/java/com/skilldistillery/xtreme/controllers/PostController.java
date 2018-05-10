@@ -70,17 +70,17 @@ public class PostController {
 	}
 
 	@RequestMapping(path = "/categories/{id}/posts", method = RequestMethod.GET)
-	public List<Post> index(@PathVariable int id) {
+	public List<Post> indexForCategories(@PathVariable int id) {
 		return postService.findByCategoryId(id);
 	}
 
 	@RequestMapping(path = "/posts/search/{keyword}", method = RequestMethod.GET)
-	public List<Post> index(@PathVariable String keyword) {
-		return postService.queryByKeywordLikeIgnoreCase("%" + keyword + "%");
+	public List<Post> indexForSearch(@PathVariable String keyword) {
+		return postService.searchForPost("%" + keyword + "%");
 	}
 
 	@RequestMapping(path = "/posts/search/price/{low}/{high}", method = RequestMethod.GET)
-	public List<Post> index(@PathVariable double low, @PathVariable double high) {
+	public List<Post> indexForPrice(@PathVariable double low, @PathVariable double high) {
 		return postService.findByPriceBetween(low, high);
 	}
 
